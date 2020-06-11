@@ -13,17 +13,21 @@
         <Modifier TargetProperty="PreparationDurationFactorMax" Operation="Multiplication"  Value="1.2"      Path="ClassModuleWeapon" TooltipHidden="true"/>
         <Modifier TargetProperty="ShootingDuration"             Operation="Addition"        Value="2"        Path="ClassModuleWeapon" TooltipHidden="true"/>
         <Modifier TargetProperty="ShotsCountPerSalvo"           Operation="Addition"        Value="1"        Path="ClassModuleWeapon" TooltipHidden="true"/>
-        <Modifier TargetProperty="ProjectileSpeed"              Operation="Addition"        Value="60"       Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <!-- BM -->
+        <Modifier TargetProperty="ProjectileSpeed"              Operation="Addition"        Value="120"       Path="ClassModuleWeapon" TooltipHidden="true"/>
 
-        <Modifier TargetProperty="CriticalHitChance"            Operation="Addition"        Value="0"        Path="ClassModuleWeapon" />
+        <!-- BM -->
+        <Modifier TargetProperty="CriticalHitChance"            Operation="Addition"        Value="0.15"        Path="ClassModuleWeapon" />
         <Modifier TargetProperty="ShieldPenetrationFactor"      Operation="Addition"        Value="0.6"      Path="ClassModuleWeapon" TooltipHidden="true"/>
         <Modifier TargetProperty="HullPlatingPenetrationFactor" Operation="Addition"        Value="0.1"      Path="ClassModuleWeapon" TooltipHidden="true"/>
 
         <Modifier TargetProperty="LongRangePenalty"             Operation="Addition"        Value="0"        Path="ClassModuleWeapon" TooltipHidden="true"/>
-        <Modifier TargetProperty="MediumRangePenalty"           Operation="Addition"        Value="0.5"      Path="ClassModuleWeapon" TooltipHidden="true"/>
-        <Modifier TargetProperty="ShortRangePenalty"            Operation="Addition"        Value="0.75"     Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <!-- BM -->
+        <Modifier TargetProperty="MediumRangePenalty"           Operation="Addition"        Value="0.35"     Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <!-- BM -->
+        <Modifier TargetProperty="ShortRangePenalty"            Operation="Addition"        Value="0.7"        Path="ClassModuleWeapon" TooltipHidden="true"/>
         <Modifier TargetProperty="DeadZoneRangePenalty"         Operation="Addition"        Value="1"        Path="ClassModuleWeapon" TooltipHidden="true"/>
-        
+
         <!--Every time a module is installed, the upkeep grows-->
         <Modifier TargetProperty="GarrisonMoneyUpkeep"          Operation="Addition" Value="$(UpkeepFromModules)"      Path="../ClassShip"/>
 
