@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="../../Schemas/Amplitude.Unity.Simulation.SimulationDescriptor.xsd">
+    <SimulationDescriptor Name="ClassModuleWeaponBeam"  Type="ClassModuleWeapon">
+        <Modifier TargetProperty="DamageBonusAtShortRange"     Operation="Addition"        Value="0.25"           Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="DamageBonusAtMediumRange"     Operation="Addition"        Value="0.1"           Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="DamageBonusAtLongRange"     Operation="Addition"        Value="-0.05"           Path="ClassModuleWeapon" TooltipHidden="true"/>
+
+        <Modifier TargetProperty="WeaponTypeEnergy"             Operation="Addition"        Value="1"          Path="ClassModuleWeapon" TooltipHidden="true"/>
+
+        <Modifier TargetProperty="Cooldown"                     Operation="Addition"        Value="6.8"        Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="PreparationDuration"          Operation="Addition"        Value="3.5"        Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="PreparationDurationFactorMin" Operation="Multiplication"  Value="0.5"        Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="PreparationDurationFactorMax" Operation="Multiplication"  Value="1.5"        Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="ShootingDuration"             Operation="Addition"        Value="1.2"        Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="ShotsCountPerSalvo"           Operation="Addition"        Value="1"          Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="ProjectileSpeed"              Operation="Addition"        Value="-1"         Path="ClassModuleWeapon" TooltipHidden="true"/>
+
+        <Modifier TargetProperty="CriticalHitChance"            Operation="Addition"        Value="0.05"        Path="ClassModuleWeapon"/>
+        <Modifier TargetProperty="ShieldPenetrationFactor"      Operation="Addition"        Value="0.1"        Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="HullPlatingPenetrationFactor" Operation="Addition"        Value="0.9"        Path="ClassModuleWeapon" TooltipHidden="true"/>
+
+        <Modifier TargetProperty="LongRangePenalty"             Operation="Addition"        Value="0"            Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="MediumRangePenalty"           Operation="Addition"        Value="0"            Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="ShortRangePenalty"            Operation="Addition"        Value="0"            Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="DeadZoneRangePenalty"         Operation="Addition"        Value="1"            Path="ClassModuleWeapon" TooltipHidden="true"/>
+
+        <!--Every time a module is installed, the upkeep grows-->
+        <Modifier TargetProperty="GarrisonMoneyUpkeep"          Operation="Addition" Value="$(UpkeepFromModules)"    Path="../ClassShip"/>
+
+        <Modifier TargetProperty="DamagePerSecondBeam"          Operation="Addition" Value="$(DamagePerSecond)"      Path="../ClassShip"/>
+    </SimulationDescriptor>
+</Datatable>

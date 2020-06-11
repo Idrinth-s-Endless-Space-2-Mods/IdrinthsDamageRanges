@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="../../Schemas/BattleEffectDefinition.xsd">
+    <BattleEffect_SetPropertyValue
+        Name="Salvo_InitEffectiveDamageAtShortRange"
+        PropertyName="EffectiveDamage"
+        Operation="Set"
+        InterpreterFormula="Property(Owner, @ClassModuleWeapon, Damage) * (1 - Property(InitiatorTarget, @ClassShip, DefenseBonusAtShortRange) - Property(InitiatorTarget, @ClassShip, DefenseBonusOverall)) * (1 + Property(Owner, @ClassModuleWeapon, DamageBonusAtShortRange))"/>
+    <BattleEffect_SetPropertyValue
+        Name="Salvo_InitEffectiveDamageAtMediumRange"
+        PropertyName="EffectiveDamage"
+        Operation="Set"
+        InterpreterFormula="Property(Owner, @ClassModuleWeapon, Damage) * (1 - Property(InitiatorTarget, @ClassShip, DefenseBonusAtMediumRange) - Property(InitiatorTarget, @ClassShip, DefenseBonusOverall)) * (1 + Property(Owner, @ClassModuleWeapon, DamageBonusAtMediumRange))"/>
+    <BattleEffect_SetPropertyValue
+        Name="Salvo_InitEffectiveDamageAtLongRange"
+        PropertyName="EffectiveDamage"
+        Operation="Set"
+        InterpreterFormula="Property(Owner, @ClassModuleWeapon, Damage) * (1 - Property(InitiatorTarget, @ClassShip, DefenseBonusAtLongRange) - Property(InitiatorTarget, @ClassShip, DefenseBonusOverall)) * (1 + Property(Owner, @ClassModuleWeapon, DamageBonusAtLongRange))"/>
+</Datatable>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="../../Schemas/Amplitude.Unity.Simulation.SimulationDescriptor.xsd">
+    <SimulationDescriptor Name="ClassModuleWeapon"  Type="ClassModule">
+        <Property Name="DamageBonusAtShortRange" BaseValue="0"/>
+        <Property Name="DamageBonusAtMediumRange" BaseValue="0"/>
+        <Property Name="DamageBonusAtLongRange" BaseValue="0"/>
+
+        <!--Visuals/Calculation (Projectile speed affects both visuals and gameplay. If visual salvo does not support the chosen speed wierdness can occur, gameplay will be fine)-->
+        <Property Name="ShotsCountPerSalvo"/>
+        <Property Name="ProjectileSpeed" BaseValue="0" MinValue="Negative"/>
+        
+        <!--Cooldown is the only value that affects gameplay directly. 
+        The sum of preparation duration (including max factor multiplication) and shooting duration has to be lower than cooldown.-->
+        <Property Name="Cooldown"/>
+        <Property Name="PreparationDuration"/>
+        <Property Name="PreparationDurationFactorMin" BaseValue="1"/>
+        <Property Name="PreparationDurationFactorMax" BaseValue="1"/>
+        <Property Name="ShootingDuration"/>
+        
+        <!--Base gameplay values-->
+        <Property Name="Damage"                         BaseValue="0" MinValue="Negative"/>
+        <Property Name="CriticalHitChance"/>
+        
+        <Property Name="ShieldPenetrationFactor"        BaseValue="0" MinValue="0" MaxValue="1"/>
+        <Property Name="ShieldAbsorptionValue"         BaseValue="0"/>
+
+        <Property Name="HullPlatingPenetrationFactor"   BaseValue="0" MinValue="0" MaxValue="1"/>
+        <Property Name="HullPlatingAbsorptionValue"    BaseValue="0"/>
+
+        <!--Do not remove. Formula for hitting: weaponAccuracy - targetEvasion - rangePenalty-->
+        <Property Name="Accuracy"                       BaseValue="1" MinValue="0.01"/>
+        <Property Name="InitialLongRangeAccuracy"                           BaseValue="0"/>
+        <Property Name="InitialMediumRangeAccuracy"                         BaseValue="0"/>
+        <Property Name="InitialShortRangeAccuracy"                          BaseValue="0"/>
+      
+        <!--Range factors: Used to affect accuracy at ranges-->
+        <Property Name="LongRangePenalty"         BaseValue="0" MinValue="0" MaxValue="1"/>
+        <Property Name="MediumRangePenalty"       BaseValue="0" MinValue="0" MaxValue="1"/>
+        <Property Name="ShortRangePenalty"        BaseValue="0" MinValue="0" MaxValue="1"/>
+        <Property Name="DeadZoneRangePenalty"     BaseValue="0" MinValue="0" MaxValue="1"/>
+
+        <Property Name="WeaponTypePhysical"       BaseValue="0" MinValue="0" MaxValue="1"/>
+        <Property Name="WeaponTypeEnergy"         BaseValue="0" MinValue="0" MaxValue="1"/>
+        
+        <Property Name="FlakDPSMissile"           BaseValue="0" /> <!-- Used for Tooltip -->
+        <Property Name="FlakDamage"               BaseValue="0"/> <!-- Used for Tooltip -->
+        <Property Name="FlakDPSSquadron"          BaseValue="0" /> <!-- Used for Tooltip -->
+        <Property Name="EfficiencyAgainstSquadron" BaseValue="0"/> <!-- Real value used in computations for Flak Damage -->
+        <Property Name="FlakDPSSquadron"          BaseValue="0" /> <!-- Fake value for tooltip -->
+        <Property Name="FlakCooldown"               BaseValue="0.5"/> <!--Used for centralization of feedback purposes-->
+        <Property Name="MissileHealth"            BaseValue="0"/>
+        
+        <Property Name="ShipManpowerKillPerHit"   BaseValue="0" />
+
+        <Property Name="DamageAgainstSmallShipsModifier"    BaseValue="0"/>
+        <Property Name="DamageAgainstMediumShipsModifier"   BaseValue="0"/>
+        <Property Name="DamageAgainstLargeShipsModifier"    BaseValue="0"/>
+
+        <!-- Value used for Tooltip Feedback. -->
+        <Property Name="DamagePerSecond"          BaseValue="0"/>
+        <Property Name="DamagePerSecondShort"     BaseValue="0"/>
+        <Property Name="DamagePerSecondMedium"    BaseValue="0"/>
+        <Property Name="DamagePerSecondLong"      BaseValue="0"/>
+
+        <!-- Strat special effects -->
+        <Property Name="SalvoHealthPercent"                     BaseValue="0"/>
+        <Property Name="OpponentEnergyWeaponAccuracyPercent"    BaseValue="0" MinValue="Negative"/>
+        <Property Name="OpponentCooldownReductionPercent"       BaseValue="0"/>
+        <Property Name="DamageAbsorbedByShieldMultiplier"       BaseValue="0"/>
+        <Property Name="SplashFlotillaDamagePercent"            BaseValue="0"/>
+        <Property Name="HullPlatingPenetrationFactorBonus"      BaseValue="0"/>
+
+        <Property Name="OffensiveMilitaryPowerForSimplifiedBattles" BaseValue="0"/>
+
+        <Property Name="CanAttack" BaseValue="1" IsSealed="true"/>
+        
+        <BinaryModifier TargetProperty="DamagePerSecond" Operation="Addition" Left="$(Damage)" BinaryOperation="Division" Right="$(Cooldown)" Path="ClassModuleWeapon" TooltipHidden="true"/>
+
+        <BinaryModifier       TargetProperty="InitialLongRangeAccuracy"        Operation="Addition"     Left="1" BinaryOperation="Subtraction"   Right="$(LongRangePenalty)"                            Path="ClassModuleWeapon" Priority="1" TooltipHidden="true"/>
+        <BinaryModifier       TargetProperty="InitialMediumRangeAccuracy"      Operation="Addition"     Left="1" BinaryOperation="Subtraction"     Right="$(MediumRangePenalty)"                        Path="ClassModuleWeapon" Priority="1" TooltipHidden="true"/>
+        <BinaryModifier       TargetProperty="InitialShortRangeAccuracy"       Operation="Addition"     Left="1" BinaryOperation="Subtraction"    Right="$(ShortRangePenalty)"                          Path="ClassModuleWeapon" Priority="1" TooltipHidden="true"/>
+
+
+        <Modifier       TargetProperty="DamagePerSecond"    Operation="Addition"    Value="$(DamagePerSecond)"              Path="ClassModuleWeapon/../ClassShip" TooltipHidden="true"/>
+        
+        <!-- Multiplying damage for ship size -->
+        <Modifier TargetProperty="Damage" Operation="Multiplication" Value="$(Multiplier)" TooltipHidden="true"/>
+        <Modifier TargetProperty="MissileHealth"  Operation="Multiplication" Value="$(Multiplier)" TooltipHidden="true"/>
+
+        <!-- Used to set the offensive power of the module -->
+        <BinaryModifier TargetProperty="OffensiveMilitaryPower"  Operation="Addition"       Left="1"    BinaryOperation="Subtraction" Right="$(LongRangePenalty)"   Path="ClassModuleWeapon,!ClassModuleWeaponFlack" TooltipHidden="true" Priority="0"/>
+        <BinaryModifier TargetProperty="OffensiveMilitaryPower"  Operation="Addition"       Left="1"    BinaryOperation="Subtraction" Right="$(MediumRangePenalty)" Path="ClassModuleWeapon,!ClassModuleWeaponFlack" TooltipHidden="true" Priority="0"/>
+        <BinaryModifier TargetProperty="OffensiveMilitaryPower"  Operation="Addition"       Left="1"    BinaryOperation="Subtraction" Right="$(ShortRangePenalty)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack" TooltipHidden="true" Priority="0"/>
+        <Modifier       TargetProperty="OffensiveMilitaryPower"  Operation="Multiplication" Value="$(DamagePerSecond)"      Path="ClassModuleWeapon,!ClassModuleWeaponFlack,!ClassModuleWeaponBoardingPod" TooltipHidden="true" Priority="0"/>
+        <BinaryModifier TargetProperty="OffensiveMilitaryPower"  Operation="Multiplication" Left="1"    BinaryOperation="Addition"    Right="$(CriticalHitChance)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack" TooltipHidden="true" Priority="0"/>
+        <BinaryModifier TargetProperty="OffensiveMilitaryPower"  Operation="Addition" Left="5"    BinaryOperation="Multiplication"    Right="$(ShipManpowerKillPerHit)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack" TooltipHidden="true" Priority="1"/>
+
+        
+        <BinaryModifier TargetProperty="DamagePerSecondShort"    Operation="Addition"       Left="1"    BinaryOperation="Subtraction"  Right="$(ShortRangePenalty)"/>
+        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Multiplication" Value="$(DamagePerSecond)" />
+        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Percent" Value="$(DamageBonusAtShortRange)" />
+        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Addition"       Value="$(DamagePerSecondShort)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack/../ClassShip"/>
+
+        <BinaryModifier TargetProperty="DamagePerSecondMedium"   Operation="Addition"       Left="1"    BinaryOperation="Subtraction"  Right="$(MediumRangePenalty)"/>
+        <Modifier TargetProperty="DamagePerSecondMedium"         Operation="Multiplication" Value="$(DamagePerSecond)" />
+        <Modifier TargetProperty="DamagePerSecondMedium"         Operation="Percent" Value="$(DamageBonusAtMediumRange)" />
+        <Modifier TargetProperty="DamagePerSecondMedium"         Operation="Addition"       Value="$(DamagePerSecondMedium)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack/../ClassShip"/>
+
+        <BinaryModifier TargetProperty="DamagePerSecondLong"     Operation="Addition"       Left="1"    BinaryOperation="Subtraction"  Right="$(LongRangePenalty)"/>
+        <Modifier TargetProperty="DamagePerSecondLong"           Operation="Multiplication" Value="$(DamagePerSecond)" />
+        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Percent" Value="$(DamageBonusAtLongRange)" />
+        <Modifier TargetProperty="DamagePerSecondLong"           Operation="Addition"       Value="$(DamagePerSecondLong)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack/../ClassShip"/>
+        <Modifier TargetProperty="HullPlatingPenetrationFactor"  Operation="Addition"       Value="$(HullPlatingPenetrationFactorBonus)"/>
+
+        <Modifier TargetProperty="OffensiveMilitaryPowerForSimplifiedBattles" Operation="Addition" Value="$(OffensiveMilitaryPower)" Path="ClassModuleWeapon,!ClassModuleWeaponBoardingPod"/>
+    </SimulationDescriptor>
+</Datatable>

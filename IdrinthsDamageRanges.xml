@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="Schemas/Amplitude.Unity.Runtime.RuntimeModule.xsd">
+    <RuntimeModule Name="IdrinthsDamageRanges" Type="Extension">
+        <Title>Idrinth's Damage Ranges</Title>
+        <Description>Imspired by "Knyghte.Fall - Enhanced Beams", this mod adjusts weapon damage by range. The following modifiers are sorted from short to long range.
+
+Laser 115% 105% 95%
+Beam 125% 110% 95%
+Kinetic 100% 95% 90%
+Missile 105% 100% 95%
+
+These values are meant to differentiate weapons a bit more and may not yet be perfectly balanced.
+
+Consider this mod WIP!
+        
+Source code can be found at  - contributions are welcome.</Description>
+        <Author>Idrinth</Author>
+        <Homepage></Homepage>
+        <PreviewImageFile>idr.jpg</PreviewImageFile>
+        <ReleaseNotes></ReleaseNotes>
+        <Tags>Gameplay,Balance</Tags>
+
+        <Plugins>
+            <DatabasePlugin DataType="Amplitude.Unity.Simulation.SimulationDescriptor, Assembly-CSharp-firstpass">
+                <FilePath>Simulation/SimulationDescriptors[Idrinth][*].xml</FilePath>
+            </DatabasePlugin>
+
+            <DatabasePlugin DataType="BattleEffectDefinition, Assembly-CSharp">
+                <ExtraTypes>
+                    <ExtraType DataType="BattleEffectDefinition_SetPropertyValue, Assembly-CSharp" />
+                </ExtraTypes>
+                <FilePath>Simulation/BattleEffectDefinitions[Idrinth].xml</FilePath>
+            </DatabasePlugin>
+        </Plugins>
+
+    </RuntimeModule>
+</Datatable>
