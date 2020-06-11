@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="../../Schemas/Amplitude.Unity.Simulation.SimulationDescriptor.xsd">
     <SimulationDescriptor Name="ClassModuleWeaponKinetic"  Type="ClassModuleWeapon">
-        <Modifier TargetProperty="DamageBonusAtMediumRange"     Operation="Addition"        Value="-0.05"       Path="ClassModuleWeapon" TooltipHidden="true"/>
-        <Modifier TargetProperty="DamageBonusAtLongRange"     Operation="Addition"        Value="-0.1"       Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="DamageFactorAtShortRange"     Operation="Addition"        Value="0.05"       Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="DamageFactorAtMediumRange"     Operation="Addition"        Value="0"       Path="ClassModuleWeapon" TooltipHidden="true"/>
+        <Modifier TargetProperty="DamageFactorAtLongRange"     Operation="Addition"        Value="-0.05"       Path="ClassModuleWeapon" TooltipHidden="true"/>
 
         <Modifier TargetProperty="WeaponTypePhysical"           Operation="Addition" Value="1"            Path="ClassModuleWeapon" TooltipHidden="true"/>
         

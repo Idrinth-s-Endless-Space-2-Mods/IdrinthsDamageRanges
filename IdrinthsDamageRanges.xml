@@ -4,18 +4,18 @@
         <Title>Idrinth's Damage Ranges</Title>
         <Description>Imspired by "Knyghte.Fall - Enhanced Beams", this mod adjusts weapon damage by range. The following modifiers are sorted from short to long range.
 
-Laser 115% 105% 95%
-Beam 125% 110% 95%
-Kinetic 100% 95% 90%
-Missile 105% 100% 95%
+Laser 115% 105% 100%
+Beam 150% 120% 100%
+Kinetic 105% 100% 95%
+Missile 110% 100% 90%
 
 These values are meant to differentiate weapons a bit more and may not yet be perfectly balanced.
 
 Consider this mod WIP!
-        
-Source code can be found at  - contributions are welcome.</Description>
+
+Source code can be found at https://github.com/Idrinth-s-Endless-Space-2-Mods/IdrinthsDamageRanges - contributions are welcome.</Description>
         <Author>Idrinth</Author>
-        <Homepage></Homepage>
+        <Homepage>https://github.com/Idrinth-s-Endless-Space-2-Mods/IdrinthsDamageRanges</Homepage>
         <PreviewImageFile>idr.jpg</PreviewImageFile>
         <ReleaseNotes></ReleaseNotes>
         <Tags>Gameplay,Balance</Tags>

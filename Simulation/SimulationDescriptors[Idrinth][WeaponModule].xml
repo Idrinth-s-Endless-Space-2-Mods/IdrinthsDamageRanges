@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Datatable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:noNamespaceSchemaLocation="../../Schemas/Amplitude.Unity.Simulation.SimulationDescriptor.xsd">
     <SimulationDescriptor Name="ClassModuleWeapon"  Type="ClassModule">
-        <Property Name="DamageBonusAtShortRange" BaseValue="0"/>
-        <Property Name="DamageBonusAtMediumRange" BaseValue="0"/>
-        <Property Name="DamageBonusAtLongRange" BaseValue="0"/>
+        <Property Name="DamageFactorAtShortRange" BaseValue="1" MinValue="Negative"/>
+        <Property Name="DamageFactorAtMediumRange" BaseValue="1" MinValue="Negative"/>
+        <Property Name="DamageFactorAtLongRange" BaseValue="1" MinValue="Negative"/>
 
         <!--Visuals/Calculation (Projectile speed affects both visuals and gameplay. If visual salvo does not support the chosen speed wierdness can occur, gameplay will be fine)-->
         <Property Name="ShotsCountPerSalvo"/>
@@ -98,17 +98,17 @@
         
         <BinaryModifier TargetProperty="DamagePerSecondShort"    Operation="Addition"       Left="1"    BinaryOperation="Subtraction"  Right="$(ShortRangePenalty)"/>
         <Modifier TargetProperty="DamagePerSecondShort"          Operation="Multiplication" Value="$(DamagePerSecond)" />
-        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Percent" Value="$(DamageBonusAtShortRange)" />
+        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Multiplication" Value="$(DamageFactorAtShortRange)" />
         <Modifier TargetProperty="DamagePerSecondShort"          Operation="Addition"       Value="$(DamagePerSecondShort)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack/../ClassShip"/>
 
         <BinaryModifier TargetProperty="DamagePerSecondMedium"   Operation="Addition"       Left="1"    BinaryOperation="Subtraction"  Right="$(MediumRangePenalty)"/>
         <Modifier TargetProperty="DamagePerSecondMedium"         Operation="Multiplication" Value="$(DamagePerSecond)" />
-        <Modifier TargetProperty="DamagePerSecondMedium"         Operation="Percent" Value="$(DamageBonusAtMediumRange)" />
+        <Modifier TargetProperty="DamagePerSecondMedium"         Operation="Multiplication" Value="$(DamageFactorAtMediumRange)" />
         <Modifier TargetProperty="DamagePerSecondMedium"         Operation="Addition"       Value="$(DamagePerSecondMedium)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack/../ClassShip"/>
 
         <BinaryModifier TargetProperty="DamagePerSecondLong"     Operation="Addition"       Left="1"    BinaryOperation="Subtraction"  Right="$(LongRangePenalty)"/>
         <Modifier TargetProperty="DamagePerSecondLong"           Operation="Multiplication" Value="$(DamagePerSecond)" />
-        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Percent" Value="$(DamageBonusAtLongRange)" />
+        <Modifier TargetProperty="DamagePerSecondShort"          Operation="Multiplication" Value="$(DamageFactorAtLongRange)" />
         <Modifier TargetProperty="DamagePerSecondLong"           Operation="Addition"       Value="$(DamagePerSecondLong)"  Path="ClassModuleWeapon,!ClassModuleWeaponFlack/../ClassShip"/>
         <Modifier TargetProperty="HullPlatingPenetrationFactor"  Operation="Addition"       Value="$(HullPlatingPenetrationFactorBonus)"/>
 
